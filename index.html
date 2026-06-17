@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Undangan Pernikahan - Alwi & Wiwit</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+:root{
+--gold:#d4af37;
+--gold-dark:#b3922e;
+--cream:#fcfbf7;
+--text:#333;
+--card:rgba(255,255,255,.85);
+}
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+body{
+font-family:Montserrat,sans-serif;
+background:linear-gradient(to bottom,#fffdf8,#f8f3e8);
+color:var(--text);
+overflow-x:hidden;
+}
+body::before,body::after{
+content:"❀";
+position:fixed;
+font-size:90px;
+opacity:.08;
+z-index:-1;
+}
+body::before{top:10px;left:10px}
+body::after{bottom:10px;right:10px}
+
+.cover{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+color:#fff;
+background:
+linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
+url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1400')
+center/cover;
+}
+.cover h1{
+font-family:'Great Vibes',cursive;
+font-size:4.5rem;
+color:var(--gold);
+}
+.guest-box{
+margin:20px 0;
+padding:16px 30px;
+border-radius:18px;
+backdrop-filter:blur(12px);
+background:rgba(255,255,255,.15);
+}
+.btn{
+display:inline-block;
+padding:14px 28px;
+background:var(--gold);
+color:#fff;
+border:none;
+border-radius:50px;
+cursor:pointer;
+text-decoration:none;
+font-weight:600;
+transition:.3s;
+}
+.btn:hover{transform:translateY(-3px);background:var(--gold-dark)}
+
+#main{display:none}
+
+.music{
+position:fixed;
+right:20px;
+bottom:90px;
+width:55px;height:55px;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+background:var(--gold);
+color:#fff;
+z-index:999;
+cursor:pointer;
+box-shadow:0 8px 20px rgba(0,0,0,.2);
+}
+
+.nav{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:rgba(255,255,255,.95);
+backdrop-filter:blur(10px);
+display:flex;
+justify-content:space-around;
+padding:14px;
+z-index:999;
+box-shadow:0 -4px 15px rgba(0,0,0,.08);
+}
+.nav a{
+color:var(--gold-dark);
+font-size:1.2rem;
+}
+
+section{
+padding:80px 20px;
+max-width:1000px;
+margin:auto;
+text-align:center;
+}
+
+.title{
+font-family:'Great Vibes',cursive;
+font-size:3.5rem;
+color:var(--gold-dark);
+margin-bottom:20px;
+}
+
+.card{
+background:var(--card);
+backdrop-filter:blur(10px);
+padding:25px;
+border-radius:24px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.couple{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+margin-top:40px;
+}
+.person img{
+width:180px;height:180px;
+object-fit:cover;
+border-radius:50%;
+border:5px solid var(--gold);
+}
+
+.countdown{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:12px;
+margin-top:25px;
+}
+.count{
+background:var(--gold);
+color:#fff;
+padding:15px;
+border-radius:15px;
+}
+.count span{
+display:block;
+font-size:2rem;
+font-weight:700;
+}
+
+.timeline{
+display:flex;
+flex-direction:column;
+gap:20px;
+margin-top:30px;
+}
+.timeline .item{
+padding:20px;
+border-left:5px solid var(--gold);
+text-align:left;
+background:white;
+border-radius:12px;
+}
+
+.gifts{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-top:20px;
+}
+.gift{
+background:white;
+padding:20px;
+border-radius:16px;
+box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+.reveal{
+opacity:0;
+transform:translateY(40px);
+transition:all .8s ease;
+}
+.reveal.active{
+opacity:1;
+transform:translateY(0);
+}
+
+footer{
+padding:60px 20px 120px;
+text-align:center;
+}
+
+@media(max-width:600px){
+.cover h1{font-size:3rem}
+.title{font-size:2.5rem}
+.countdown{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<audio id="song" loop>
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<div class="cover" id="cover">
+<p>UNDANGAN PERNIKAHAN</p>
+<h1>Alwi & Wiwit</h1>
+<p>Kepada Yth.</p>
+<div class="guest-box"><h3 id="guest-name">Bapak/Ibu/Saudara/i</h3></div>
+<button class="btn" onclick="openInvitation()"><i class="fas fa-envelope-open-text"></i> Buka Undangan</button>
+</div>
+
+<div id="main">
+
+<div class="music" onclick="toggleMusic()"><i id="musicIcon" class="fas fa-music"></i></div>
+
+<section class="reveal">
+<h2 class="title">Mempelai</h2>
+<div class="couple">
+<div class="card person">
+<img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400">
+<h3>Wiwit, S.Kom</h3>
+<p>Putri dari Bapak Fulan & Ibu Fulanah</p>
+</div>
+<div class="card person">
+<img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400">
+<h3>Alwi, S.T</h3>
+<p>Putra dari Bapak Ali & Ibu Aminah</p>
+</div>
+</div>
+</section>
+
+<section class="reveal">
+<h2 class="title">Hari Bahagia</h2>
+<div class="card">
+<p><strong>Sabtu, 12 Desember 2026</strong></p>
+<p>09.00 WIB - Selesai</p>
+<p>Gedung Pernikahan Indah</p>
+
+<div class="countdown">
+<div class="count"><span id="days">0</span>Hari</div>
+<div class="count"><span id="hours">0</span>Jam</div>
+<div class="count"><span id="minutes">0</span>Menit</div>
+<div class="count"><span id="seconds">0</span>Detik</div>
+</div>
+</div>
+</section>
+
+<section class="reveal">
+<h2 class="title">Love Story</h2>
+<div class="timeline">
+<div class="item"><h3>2021</h3><p>Pertama kali bertemu.</p></div>
+<div class="item"><h3>2023</h3><p>Mulai menjalin hubungan.</p></div>
+<div class="item"><h3>2026</h3><p>Menuju pernikahan.</p></div>
+</div>
+</section>
+
+<section class="reveal">
+<h2 class="title">RSVP Buku Tamu</h2>
+<div class="card">
+<p>Konfirmasi kehadiran melalui WhatsApp.</p><br>
+<a class="btn" target="_blank" href="https://wa.me/6281234567890?text=Assalamualaikum,%20saya%20akan%20hadir%20di%20acara%20pernikahan">Kirim RSVP</a>
+</div>
+</section>
+
+<section class="reveal">
+<h2 class="title">Wedding Gift</h2>
+<div class="gifts">
+
+<div class="gift">
+<h3>DANA</h3>
+<p>085788750874</p>
+<p>a.n Muhammad Ryvadh Alwi</p><br>
+<button class="btn" onclick="copyNumber()">Salin</button>
+</div>
+
+<div class="gift">
+<h3>OVO</h3>
+<p>085788750874</p>
+<p>a.n Muhammad Ryvadh Alwi</p><br>
+<button class="btn" onclick="copyNumber()">Salin</button>
+</div>
+
+<div class="gift">
+<h3>GoPay</h3>
+<p>085788750874</p>
+<p>a.n Muhammad Ryvadh Alwi</p><br>
+<button class="btn" onclick="copyNumber()">Salin</button>
+</div>
+
+<div class="gift">
+<h3>ShopeePay</h3>
+<p>085788750874</p>
+<p>a.n Muhammad Ryvadh Alwi</p><br>
+<button class="btn" onclick="copyNumber()">Salin</button>
+</div>
+
+</div>
+</section>
+
+<footer>
+<h2 class="title">Terima Kasih</h2>
+<p>Merupakan suatu kehormatan bagi kami atas kehadiran dan doa restunya.</p>
+</footer>
+
+<nav class="nav">
+<a href="#"><i class="fas fa-home"></i></a>
+<a href="#main"><i class="fas fa-heart"></i></a>
+<a href="#main"><i class="fas fa-calendar"></i></a>
+<a href="#main"><i class="fas fa-gift"></i></a>
+</nav>
+
+</div>
+
+<script>
+const params=new URLSearchParams(window.location.search);
+const guest=params.get('to');
+if(guest) document.getElementById('guest-name').innerText=guest;
+
+const audio=document.getElementById('song');
+
+function openInvitation(){
+document.getElementById('cover').style.display='none';
+document.getElementById('main').style.display='block';
+audio.play().catch(()=>{});
+}
+
+function toggleMusic(){
+const icon=document.getElementById('musicIcon');
+if(audio.paused){
+audio.play();
+icon.className='fas fa-pause';
+}else{
+audio.pause();
+icon.className='fas fa-music';
+}
+}
+
+function copyNumber(){
+navigator.clipboard.writeText('085788750874');
+alert('Nomor berhasil disalin');
+}
+
+const target=new Date("Dec 12, 2026 09:00:00").getTime();
+
+setInterval(()=>{
+const now=new Date().getTime();
+const dist=target-now;
+
+document.getElementById("days").innerText=Math.floor(dist/(1000*60*60*24));
+document.getElementById("hours").innerText=Math.floor((dist%(1000*60*60*24))/(1000*60*60));
+document.getElementById("minutes").innerText=Math.floor((dist%(1000*60*60))/(1000*60));
+document.getElementById("seconds").innerText=Math.floor((dist%(1000*60))/1000);
+},1000);
+
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting) entry.target.classList.add('active');
+});
+},{threshold:.15});
+
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+</script>
+
+</body>
+</html>
