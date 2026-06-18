@@ -227,9 +227,11 @@ box-shadow:0 4px 12px rgba(0,0,0,.08);
 
 .reveal{
 opacity:0;
-transform:translateY(40px);
-transition:all .8s ease;
+transform:translateY(60px);
+transition:
+all 1.3s ease;
 }
+
 .reveal.active{
 opacity:1;
 transform:translateY(0);
@@ -438,6 +440,30 @@ if(entry.isIntersecting) entry.target.classList.add('active');
 
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 </script>
+const leavesContainer = document.querySelector('.leaves');
 
+for(let i=0;i<25;i++){
+
+const leaf=document.createElement('div');
+
+leaf.classList.add('leaf');
+
+leaf.innerHTML='🍃';
+
+leaf.style.left=Math.random()*100+'vw';
+
+leaf.style.animationDuration=
+(5+Math.random()*10)+'s';
+
+leaf.style.fontSize=
+(15+Math.random()*20)+'px';
+
+leaf.style.animationDelay=
+Math.random()*5+'s';
+
+leavesContainer.appendChild(leaf);
+
+}
+</script>
 </body>
 </html>
