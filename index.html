@@ -25,7 +25,7 @@ left:0;
 width:100%;
 height:100%;
 pointer-events:none;
-z-index:999;
+z-index:1;
 overflow:hidden;
 }
 
@@ -439,6 +439,34 @@ if(entry.isIntersecting) entry.target.classList.add('active');
 },{threshold:.15});
 
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+const leavesContainer =
+document.querySelector('.leaves');
+
+for(let i=0;i<30;i++){
+
+const leaf =
+document.createElement('div');
+
+leaf.classList.add('leaf');
+
+leaf.innerHTML='🍃';
+
+leaf.style.left =
+Math.random()*100+'vw';
+
+leaf.style.animationDuration =
+(8+Math.random()*12)+'s';
+
+leaf.style.animationDelay =
+Math.random()*8+'s';
+
+leaf.style.fontSize =
+(16+Math.random()*16)+'px';
+
+leavesContainer.appendChild(leaf);
+
+}
 </script>
 </body>
 </html>
