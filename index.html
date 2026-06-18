@@ -440,30 +440,5 @@ if(entry.isIntersecting) entry.target.classList.add('active');
 
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 </script>
-const leavesContainer = document.querySelector('.leaves');
-
-for(let i=0;i<25;i++){
-
-const leaf=document.createElement('div');
-
-leaf.classList.add('leaf');
-
-leaf.innerHTML='🍃';
-
-leaf.style.left=Math.random()*100+'vw';
-
-leaf.style.animationDuration=
-(5+Math.random()*10)+'s';
-
-leaf.style.fontSize=
-(15+Math.random()*20)+'px';
-
-leaf.style.animationDelay=
-Math.random()*5+'s';
-
-leavesContainer.appendChild(leaf);
-
-}
-</script>
 </body>
 </html>
