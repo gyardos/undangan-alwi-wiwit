@@ -9,16 +9,53 @@
 
 <style>
 :root{
---gold:#e76f51;
---gold-dark:#c44536;
---cream:#fff8f0;
---text:#2d2d2d;
+--gold:#6f8f72;
+--gold-dark:#4d654f;
+--cream:#f8f6ef;
+--text:#2b2b2b;
+--leaf:#88a67e;
 --card:rgba(255,255,255,.85);
 }
 *{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+    <div class="leaves"></div>
+    .leaves{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+z-index:999;
+overflow:hidden;
+}
+
+.leaf{
+position:absolute;
+top:-50px;
+font-size:22px;
+animation:fall linear infinite;
+opacity:.8;
+}
+
+@keyframes fall{
+0%{
+transform:translateY(-50px) rotate(0deg);
+}
+
+100%{
+transform:translateY(110vh) rotate(360deg);
+}
+}
 body{
 font-family:Montserrat,sans-serif;
-background:linear-gradient(to bottom,#fffdf8,#f8f3e8);
+background:
+linear-gradient(
+rgba(248,246,239,.92),
+rgba(248,246,239,.92)
+),
+url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1600&q=80');
+background-size:cover;
+background-attachment:fixed;
 color:var(--text);
 overflow-x:hidden;
 }
