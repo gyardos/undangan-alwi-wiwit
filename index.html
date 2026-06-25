@@ -246,8 +246,8 @@ box-shadow:0 4px 12px rgba(0,0,0,.08);
 }
 
 .reveal{
-opacity:1;
-transform:translateY(0);
+opacity:0;
+transform:translateY(60px);
 transition:
 all 1.3s ease;
 }
@@ -469,9 +469,16 @@ if(guest) document.getElementById('guest-name').innerText=guest;
 const audio=document.getElementById('song');
 
 function openInvitation(){
+
 document.getElementById('cover').style.display='none';
+
 document.getElementById('main').style.display='block';
+
+document.querySelectorAll('.reveal')
+.forEach(el=>el.classList.add('active'));
+
 audio.play().catch(()=>{});
+
 }
 
 function toggleMusic(){
